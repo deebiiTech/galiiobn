@@ -360,6 +360,75 @@
         </div>
     </footer>
 
+    <!-- FIREBASE REALTIME SDK & INTEGRATION MODULE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCa8D6KY4vdTg0cGp0MyDzbdiQpw4xu4DY",
+            authDomain: "obn-galii-system.firebaseapp.com",
+            databaseURL: "https://obn-galii-system-default-rtdb.firebaseio.com",
+            projectId: "obn-galii-system",
+            storageBucket: "obn-galii-system.firebasestorage.app",
+            messagingSenderId: "390689160790",
+            appId: "1:390689160790:web:ff90bb9c7dfb805273c5f7",
+            measurementId: "G-6RSJNZKXCG"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        const salesRef = ref(db, 'sales');
+        const staffRef = ref(db, 'staff');
+
+        // Dynamic Database Array
+        window.salesDatabase = [];
+        window.staffDatabase = [];
+
+        // Real-time Listener Sales Data
+        onValue(salesRef, (snapshot) => {
+            const data = snapshot.val();
+            window.salesDatabase = [];
+            if (data) {
+                Object.keys(data).forEach(key => {
+                    window.salesDatabase.push({ id: key, ...data[key] });
+                });
+            }
+            if (typeof renderSalesTable === "function") renderSalesTable();
+            if (typeof renderAdminTable === "function") renderAdminTable();
+        });
+
+        // Real-time Listener Staff Data
+        onValue(staffRef, (snapshot) => {
+            const data = snapshot.val();
+            window.staffDatabase = [];
+            if (data) {
+                Object.keys(data).forEach(key => {
+                    window.staffDatabase.push({ id: key, ...data[key] });
+                });
+            }
+            if (typeof renderAdminTable === "function") renderAdminTable();
+        });
+
+        // Database Sync Actions
+        window.pushSaleToFirebase = function(saleObj) {
+            push(salesRef, saleObj);
+        };
+
+        window.pushStaffToFirebase = function(staffObj) {
+            push(staffRef, staffObj);
+        };
+
+        window.deleteSaleFromFirebase = function(id) {
+            remove(ref(db, 'sales/' + id));
+        };
+
+        window.deleteStaffFromFirebase = function(id) {
+            remove(ref(db, 'staff/' + id));
+        };
+    </script>
+
     <script>
         const AUTH_CREDENTIALS = {
             admin: { user: "admin", pass: "admin123" },
@@ -372,13 +441,6 @@
             "KAN AYYAANOTAA": ["Stage Ayyaanaa", "Dookimentarii Fiilmii", "Ispoonsera"],
             "KAN SAGANTAA IDILEE": ["Yeroo Qilleensaa(Raadiyoo fi TV)", "Ispoonsera Sagantaa( Raadiyoo fi TV)"]
         };
-
-        let staffDatabase = [
-            { id: 1, name: "Tolosaa Caalaa", year: "2018 E.C", target: 500000 },
-            { id: 2, name: "Chaltu Ahmed", year: "2018 E.C", target: 300000 }
-        ];
-
-        let salesDatabase = [];
 
         function toggleMenu() {
             document.getElementById("navMenu").classList.toggle("active");
@@ -473,12 +535,15 @@
 
             if(!name || !target) { alert("Maaloo odeeffannoo guutuu galchaa!"); return; }
 
-            staffDatabase.push({ id: Date.now(), name: name, year: year, target: target });
+            // Firebase tti erguu
+            if (typeof window.pushStaffToFirebase === "function") {
+                window.pushStaffToFirebase({ name: name, year: year, target: target });
+            }
+
             alert("Target Hojjetaa Milkaa'inaan Galmaa'era!");
             
             document.getElementById("newStaffName").value = '';
             document.getElementById("newStaffTarget").value = '';
-            renderAdminTable();
         }
 
         function registerSale() {
@@ -492,35 +557,36 @@
 
             if(!amount) { alert("Hamma galii maddisiistan galchaa!"); return; }
 
-            salesDatabase.push({
-                id: Date.now(),
-                year: year,
-                month: month,
-                kurmana: kurmana,
-                mainCat: mainCat,
-                subCat: subCat,
-                eventCat: eventCat,
-                amount: amount
-            });
+            // Firebase tti erguu
+            if (typeof window.pushSaleToFirebase === "function") {
+                window.pushSaleToFirebase({
+                    year: year,
+                    month: month,
+                    kurmana: kurmana,
+                    mainCat: mainCat,
+                    subCat: subCat,
+                    eventCat: eventCat,
+                    amount: amount
+                });
+            }
 
             alert("Galiin Madde Milkaa'inaan Galmaa'era!");
             document.getElementById("saleAmount").value = '';
-            renderSalesTable();
-            renderAdminTable();
         }
 
         function deleteSale(id) {
             if(confirm("Daataa galii kana haquu akka feetu mirkaneeffadhu?")) {
-                salesDatabase = salesDatabase.filter(item => item.id !== id);
-                renderSalesTable();
-                renderAdminTable();
+                if (typeof window.deleteSaleFromFirebase === "function") {
+                    window.deleteSaleFromFirebase(id);
+                }
             }
         }
 
         function deleteStaff(id) {
             if(confirm("Target hojjetaa kana haquu akka feetu mirkaneeffadhu?")) {
-                staffDatabase = staffDatabase.filter(item => item.id !== id);
-                renderAdminTable();
+                if (typeof window.deleteStaffFromFirebase === "function") {
+                    window.deleteStaffFromFirebase(id);
+                }
             }
         }
 
@@ -531,7 +597,7 @@
 
             tbody.innerHTML = "";
 
-            let filtered = salesDatabase.filter(s => {
+            let filtered = (window.salesDatabase || []).filter(s => {
                 let matchYear = (filterYear === "ALL" || s.year === filterYear);
                 let matchKurmana = (filterKurmana === "ALL" || s.kurmana === filterKurmana);
                 return matchYear && matchKurmana;
@@ -544,8 +610,8 @@
                     <td>${sale.kurmana}</td>
                     <td>${sale.mainCat}</td>
                     <td>${serviceDetail}</td>
-                    <td><b>${sale.amount.toLocaleString()} ETB</b></td>
-                    <td><button class="btn btn-danger" onclick="deleteSale(${sale.id})">Haqi</button></td>
+                    <td><b>${Number(sale.amount).toLocaleString()} ETB</b></td>
+                    <td><button class="btn btn-danger" onclick="deleteSale('${sale.id}')">Haqi</button></td>
                 </tr>`;
                 tbody.innerHTML += row;
             });
@@ -555,21 +621,21 @@
             const tbody = document.getElementById("adminStaffTable");
             tbody.innerHTML = "";
 
-            staffDatabase.forEach(staff => {
-                const totalRevenue = salesDatabase
+            (window.staffDatabase || []).forEach(staff => {
+                const totalRevenue = (window.salesDatabase || [])
                     .filter(s => s.year === staff.year)
-                    .reduce((sum, item) => sum + item.amount, 0);
+                    .reduce((sum, item) => sum + Number(item.amount), 0);
 
-                const perf = ((totalRevenue / staff.target) * 100).toFixed(1);
+                const perf = staff.target > 0 ? ((totalRevenue / staff.target) * 100).toFixed(1) : 0;
                 const badgeClass = perf >= 100 ? 'badge-success' : 'badge-warning';
 
                 const row = `<tr>
                     <td><b>${staff.name}</b></td>
                     <td>${staff.year}</td>
-                    <td>${staff.target.toLocaleString()} ETB</td>
+                    <td>${Number(staff.target).toLocaleString()} ETB</td>
                     <td>${totalRevenue.toLocaleString()} ETB</td>
                     <td><span class="badge ${badgeClass}">${perf}%</span></td>
-                    <td><button class="btn btn-danger" onclick="deleteStaff(${staff.id})">Haqi</button></td>
+                    <td><button class="btn btn-danger" onclick="deleteStaff('${staff.id}')">Haqi</button></td>
                 </tr>`;
                 tbody.innerHTML += row;
             });
