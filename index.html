@@ -16,8 +16,20 @@
             --obn-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
-        body { background-color: var(--obn-gray); color: var(--obn-black); display: flex; flex-direction: column; min-height: 100vh; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Times New Roman', Times, serif !important; 
+        }
+        
+        body { 
+            background-color: var(--obn-gray); 
+            color: var(--obn-black); 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+        }
 
         header {
             background: linear-gradient(135deg, var(--obn-white) 60%, var(--obn-red) 60%);
@@ -34,17 +46,17 @@
 
         .brand-container { display: flex; align-items: center; gap: 15px; }
         .brand-logo { height: 60px; width: auto; object-fit: contain; }
-        .brand-text h1 { color: var(--obn-red); font-size: 20px; font-weight: 900; letter-spacing: 0.5px; }
-        .brand-text p { font-size: 12px; font-weight: 700; color: var(--obn-black); }
+        .brand-text h1 { color: var(--obn-red); font-size: 22px; font-weight: 900; letter-spacing: 0.5px; }
+        .brand-text p { font-size: 13px; font-weight: 700; color: var(--obn-black); }
 
         .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
         .hamburger div { width: 25px; height: 3px; background-color: var(--obn-white); }
 
         .nav-right { display: flex; align-items: center; gap: 15px; }
-        .user-badge { color: var(--obn-white); font-weight: 600; font-size: 14px; text-align: right; }
+        .user-badge { color: var(--obn-white); font-weight: 600; font-size: 15px; text-align: right; }
 
         .main-wrapper { flex: 1; }
-        .container { max-width: 1250px; margin: 30px auto; padding: 0 20px; }
+        .container { max-width: 1300px; margin: 30px auto; padding: 0 20px; }
 
         .hidden { display: none !important; }
 
@@ -59,17 +71,18 @@
         .card-red { border-top: 6px solid var(--obn-red); }
         .card-green { border-top: 6px solid var(--obn-green); }
 
-        h2 { font-size: 18px; margin-bottom: 20px; color: var(--obn-black); display: flex; align-items: center; gap: 10px; }
+        h2 { font-size: 20px; margin-bottom: 20px; color: var(--obn-black); display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--obn-red); padding-bottom: 8px; }
+        h3 { font-size: 17px; margin-top: 25px; margin-bottom: 15px; color: var(--obn-black); border-bottom: 1px solid var(--obn-border); padding-bottom: 5px; }
 
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
         .form-group { margin-bottom: 15px; }
-        label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #4A5568; }
+        label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 6px; color: #2D3748; }
         input, select {
             width: 100%;
             padding: 10px;
             border: 1.5px solid var(--obn-border);
             border-radius: 6px;
-            font-size: 13.5px;
+            font-size: 14px;
             transition: all 0.3s ease;
             background: #FAFAFA;
         }
@@ -84,33 +97,36 @@
             font-weight: 700;
             cursor: pointer;
             transition: background 0.3s;
-            font-size: 13.5px;
+            font-size: 14px;
         }
         .btn:hover { background-color: var(--obn-dark-red); }
         .btn-green { background-color: var(--obn-green); }
         .btn-green:hover { background-color: #006B31; }
+        .btn-blue { background-color: #2563EB; }
+        .btn-blue:hover { background-color: #1D4ED8; }
         .btn-danger { background-color: #DC2626; padding: 6px 12px; font-size: 12px; }
         .btn-danger:hover { background-color: #991B1B; }
 
         .top-nav { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
 
+        .summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .sum-card { background: #F1F5F9; border-left: 5px solid var(--obn-red); padding: 15px; border-radius: 6px; }
+        .sum-card h4 { font-size: 13px; color: #64748B; margin-bottom: 5px; }
+        .sum-card p { font-size: 18px; font-weight: bold; color: var(--obn-black); }
+
         .table-responsive { overflow-x: auto; margin-top: 15px; border-radius: 6px; border: 1px solid var(--obn-border); }
         table { width: 100%; border-collapse: collapse; background: white; }
-        th, td { padding: 12px; border-bottom: 1px solid var(--obn-border); text-align: left; font-size: 13px; }
+        th, td { padding: 10px 12px; border-bottom: 1px solid var(--obn-border); text-align: left; font-size: 13.5px; }
         th { background-color: var(--obn-black); color: white; font-weight: 600; }
         tr:hover { background-color: #F8FAFC; }
 
-        .badge { padding: 4px 8px; border-radius: 12px; color: white; font-weight: 700; font-size: 11px; }
+        .badge { padding: 4px 8px; border-radius: 12px; color: white; font-weight: 700; font-size: 12px; }
         .badge-success { background-color: var(--obn-green); }
         .badge-warning { background-color: #D97706; }
 
         .filter-section { background: #EDF2F7; padding: 15px; border-radius: 6px; margin-bottom: 20px; }
 
-        /* Summary Dashboard Cards */
-        .summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 20px; }
-        .summary-card { background: #F8FAFC; padding: 15px; border-radius: 8px; border-left: 5px solid var(--obn-red); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .summary-card h4 { font-size: 12px; color: #64748B; text-transform: uppercase; margin-bottom: 5px; }
-        .summary-card p { font-size: 18px; font-weight: 800; color: var(--obn-black); }
+        .action-bar { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 15px; }
 
         footer {
             background-color: var(--obn-black);
@@ -120,7 +136,7 @@
             border-top: 4px solid var(--obn-red);
         }
         .footer-content {
-            max-width: 1250px;
+            max-width: 1300px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -130,13 +146,16 @@
         }
         .footer-logo-area { display: flex; align-items: center; gap: 12px; }
         .footer-logo { height: 35px; width: auto; }
-        .developer-cred { font-size: 12px; color: #CBD5E1; font-weight: 600; }
+        .developer-cred { font-size: 13px; color: #CBD5E1; font-weight: 600; }
 
         @media print {
-            header, footer, .top-nav, .filter-section, .btn, .form-grid, h2 { display: none !important; }
+            header, footer, .top-nav, .filter-section, .btn, .hamburger, #loginView, .action-bar { display: none !important; }
             .card { border: none !important; box-shadow: none !important; padding: 0 !important; }
             body { background: white !important; }
-            .table-responsive { overflow: visible !important; }
+            .container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            table { width: 100% !important; border: 1px solid #000 !important; }
+            th, td { border: 1px solid #000 !important; font-size: 11px !important; padding: 6px !important; }
+            th { background-color: #eee !important; color: #000 !important; }
         }
 
         @media (max-width: 768px) {
@@ -207,8 +226,9 @@
             <!-- 2. DASHBOARD MODULE -->
             <div id="mainDashboard" class="hidden">
                 <div class="top-nav">
-                    <button class="btn" id="btnAdminTab" onclick="showTab('adminTab')">Admin Panel (Target Qabsiisuu)</button>
-                    <button class="btn btn-green" id="btnStaffTab" onclick="showTab('staffTab')">Galmee Galii (Staff)</button>
+                    <button class="btn" id="btnAdminTab" onclick="showTab('adminTab')">Admin Panel (Target & Performance)</button>
+                    <button class="btn btn-green" id="btnStaffTab" onclick="showTab('staffTab')">Galmee Galii (Sales)</button>
+                    <button class="btn btn-blue" onclick="showTab('reportTab')">Gabaasa & Summary</button>
                     <button class="btn" style="background:#475569; margin-left:auto;" onclick="logout()">Bahi (Logout)</button>
                 </div>
 
@@ -235,16 +255,10 @@
                     </div>
                     <button type="button" class="btn" onclick="setStaffTarget()">Target Qabsiisi</button>
 
-                    <!-- Summary Reports for Admin -->
-                    <h3 style="margin-top: 30px; margin-bottom: 10px;">Gabaasa Waliigalaa (Admin Summary)</h3>
-                    <div class="summary-cards" id="adminSummaryCards"></div>
-
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
-                        <h3>Tarree Hojjettootaa & Target Performance</h3>
-                        <div>
-                            <button class="btn" style="background:#1D6F42;" onclick="exportToCSV('adminStaffTable', 'OBN_Staff_Performance')">Excel (CSV)</button>
-                            <button class="btn" style="background:#0284C7;" onclick="window.print()">Print / PDF</button>
-                        </div>
+                    <h3>Tarree Hojjettootaa & Target Performance (Live)</h3>
+                    <div class="action-bar">
+                        <button class="btn btn-green" onclick="exportTableToCSV('adminStaffTable', 'Target_Performance.csv')">Export Excel (CSV)</button>
+                        <button class="btn btn-blue" onclick="window.print()">Print PDF</button>
                     </div>
                     <div class="table-responsive">
                         <table id="adminStaffTableMain">
@@ -255,7 +269,7 @@
                                     <th>Target Waggaa (ETB)</th>
                                     <th>Galii Madde (ETB)</th>
                                     <th>Raawwii (%)</th>
-                                    <th>Tarkaanfii</th>
+                                    <th class="btn-col">Tarkaanfii</th>
                                 </tr>
                             </thead>
                             <tbody id="adminStaffTable"></tbody>
@@ -268,14 +282,18 @@
                     <h2>Galmee Galii Madde (Daily Sales Register)</h2>
                     <div class="form-grid">
                         <div class="form-group">
-                            <label>Maqaa Hojjetaa (Sales Person)</label>
-                            <select id="saleStaffName">
-                                <option value="">-- Hojjetaa Filadhu --</option>
+                            <label>Maqaa Hojjetaa (Sales Name)</label>
+                            <select id="saleStaffSelect">
+                                <option value="">-- Maqaa Kee Filadhu --</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Ji'a (E.C)</label>
-                            <select id="saleMonth" onchange="autoSelectKurmanaAndYear()">
+                            <label>Maqaa Dhaabbata/Client</label>
+                            <input type="text" id="clientName" placeholder="Dhaabbata Galii Kaffale">
+                        </div>
+                        <div class="form-group">
+                            <label>Ji'a & Bara Galmee (Calendar Date)</label>
+                            <select id="saleMonth" onchange="autoSelectKurmanaAndFiscalYear()">
                                 <option value="Adoolessa">Adoolessa</option>
                                 <option value="Hagayya">Hagayya</option>
                                 <option value="Fulbaana">Fulbaana</option>
@@ -291,16 +309,16 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Bara Galmee (Calendar Year)</label>
-                            <select id="saleCalYear" onchange="autoSelectKurmanaAndYear()">
+                            <label>Bara Kalendarii (E.C)</label>
+                            <select id="calYear" onchange="autoSelectKurmanaAndFiscalYear()">
                                 <option value="2018 E.C">2018 E.C</option>
                                 <option value="2019 E.C">2019 E.C</option>
                                 <option value="2020 E.C">2020 E.C</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Bara Hojii Auto-Calculated (Fiscal Year)</label>
-                            <input type="text" id="saleFiscalYear" readonly style="background:#E2E8F0; font-weight:bold;">
+                            <label>Bara Hojii (Fiscal Year Generated)</label>
+                            <input type="text" id="fiscalYear" readonly style="font-weight: bold; color: var(--obn-red);">
                         </div>
                         <div class="form-group">
                             <label>Kurmaana</label>
@@ -333,27 +351,16 @@
                     </div>
                     <button type="button" class="btn btn-green" onclick="registerSale()">Galii Galmeessi</button>
 
-                    <!-- Summary Reports for Staff -->
-                    <h3 style="margin-top: 30px; margin-bottom: 10px;">Gabaasa Galii Kee (Staff Summary)</h3>
-                    <div class="summary-cards" id="staffSummaryCards"></div>
-
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
-                        <h3>Gabaasa fi Tarree Galii Kuufame</h3>
-                        <div>
-                            <button class="btn" style="background:#1D6F42;" onclick="exportToCSV('staffSalesTableMain', 'OBN_Sales_Report')">Excel (CSV)</button>
-                            <button class="btn" style="background:#0284C7;" onclick="window.print()">Print / PDF</button>
-                        </div>
-                    </div>
-
-                    <!-- FILTER SECTION -->
+                    <h3>Tarree Galii Kuufame (Personal Register)</h3>
+                    
                     <div class="filter-section form-grid">
                         <div class="form-group">
                             <label>Calaltuu Bara Hojii</label>
                             <select id="filterYear" onchange="renderSalesTable()">
                                 <option value="ALL">Hunda</option>
-                                <option value="2018 E.C">2018 E.C</option>
-                                <option value="2019 E.C">2019 E.C</option>
-                                <option value="2020 E.C">2020 E.C</option>
+                                <option value="2018 E.C">Bara Hojii 2018 E.C</option>
+                                <option value="2019 E.C">Bara Hojii 2019 E.C</option>
+                                <option value="2020 E.C">Bara Hojii 2020 E.C</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -368,20 +375,90 @@
                         </div>
                     </div>
 
+                    <div class="action-bar">
+                        <button class="btn btn-green" onclick="exportTableToCSV('staffSalesTableMain', 'Galmee_Galii_Sales.csv')">Export Excel (CSV)</button>
+                        <button class="btn btn-blue" onclick="window.print()">Print PDF</button>
+                    </div>
+
                     <div class="table-responsive">
                         <table id="staffSalesTableMain">
                             <thead>
                                 <tr>
-                                    <th>Hojjetaa</th>
+                                    <th>Hojjetaa (Sales)</th>
+                                    <th>Dhaabbata (Client)</th>
                                     <th>Bara Hojii / Ji'a</th>
                                     <th>Kurmaana</th>
                                     <th>Kutaa Galii</th>
                                     <th>Tajaajila / Ayyaana</th>
                                     <th>Galii Madde (ETB)</th>
-                                    <th>Tarkaanfii</th>
+                                    <th class="btn-col">Tarkaanfii</th>
                                 </tr>
                             </thead>
                             <tbody id="staffSalesTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- REPORT & SUMMARY TAB -->
+                <div id="reportTab" class="card card-red hidden">
+                    <h2>Gabaasa Guutuu & Summary Galii OBN</h2>
+                    
+                    <div class="summary-cards">
+                        <div class="sum-card">
+                            <h4>Ida'ama Galii Guutuu</h4>
+                            <p id="totalRevenueAll">0 ETB</p>
+                        </div>
+                        <div class="sum-card">
+                            <h4>Galii Sagantaa Idilee</h4>
+                            <p id="totalIdilee">0 ETB</p>
+                        </div>
+                        <div class="sum-card">
+                            <h4>Galii Ayyaanotaa</h4>
+                            <p id="totalAyyaana">0 ETB</p>
+                        </div>
+                    </div>
+
+                    <div class="action-bar">
+                        <button class="btn btn-green" onclick="exportTableToCSV('summaryTableMain', 'Gabaasa_Guutuu_OBN.csv')">Export Excel (CSV)</button>
+                        <button class="btn btn-blue" onclick="window.print()">Print PDF</button>
+                    </div>
+
+                    <h3>1. Summary Galii Tokkoon Tokkoon Gosa Tajaajilaa</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Gosa Tajaajilaa</th>
+                                    <th>Ida'ama Galii (ETB)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="serviceSummaryTable"></tbody>
+                        </table>
+                    </div>
+
+                    <h3>2. Summary Galii Tokkoon Tokkoon Ayyaanotaa</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Gosa Ayyaanaa</th>
+                                    <th>Ida'ama Galii (ETB)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="eventSummaryTable"></tbody>
+                        </table>
+                    </div>
+
+                    <h3>3. Summary Galii Dhaabbilee (Clients) Waliin</h3>
+                    <div class="table-responsive">
+                        <table id="summaryTableMain">
+                            <thead>
+                                <tr>
+                                    <th>Maqaa Dhaabbata/Client</th>
+                                    <th>Ida'ama Galii Kaffalaman (ETB)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientSummaryTable"></tbody>
                         </table>
                     </div>
                 </div>
@@ -397,7 +474,7 @@
                 <img src="obn-logo.JFIF" alt="OBN Logo" class="footer-logo" onerror="this.src='https://via.placeholder.com/40?text=OBN'">
                 <div>
                     <strong style="display:block;">Oromia Broadcasting Network</strong>
-                    <span style="font-size: 11px; color: #94A3B8;">Systema Galii fi Monitoring</span>
+                    <span style="font-size: 12px; color: #94A3B8;">Systema Galii fi Monitoring</span>
                 </div>
             </div>
             <div class="developer-cred">
@@ -430,41 +507,41 @@
             document.getElementById("navMenu").classList.toggle("active");
         }
 
-        // Logical Fiscal Year Calculation (Adoolessa 1 -> Next Year)
-        function autoSelectKurmanaAndYear() {
+        // Logic Bara Hojii (Fiscal Year): Adoolessa 1 bara N-1 irraa eegala N dhaaf
+        function autoSelectKurmanaAndFiscalYear() {
             const month = document.getElementById("saleMonth").value;
-            const calYearStr = document.getElementById("saleCalYear").value;
-            const calYearNum = parseInt(calYearStr.split(" ")[0]); 
+            const calYearStr = document.getElementById("calYear").value;
+            const calYear = parseInt(calYearStr.split(" ")[0]); 
             const kurmanaSelect = document.getElementById("saleKurmana");
-            const fiscalYearInput = document.getElementById("saleFiscalYear");
+            const fiscalInput = document.getElementById("fiscalYear");
 
-            let fiscalYearNum = calYearNum;
+            let computedFiscalYear = calYear;
 
             if (["Adoolessa", "Hagayya", "Fulbaana"].includes(month)) {
                 kurmanaSelect.value = "Kurmaana 1ffaa";
-                fiscalYearNum = calYearNum + 1; // Adoolessa 1 irraa eegale bara hojii itti aanuu ta'a
+                computedFiscalYear = calYear + 1; // E.g., Adoolessa 2018 = Bara Hojii 2019 E.C
             } else if (["Onkoloolessa", "Sadaasa", "Muddee"].includes(month)) {
                 kurmanaSelect.value = "Kurmaana 2ffaa";
-                fiscalYearNum = calYearNum + 1;
+                computedFiscalYear = calYear + 1;
             } else if (["Amajjii", "Gurraandhala", "Bitootessa"].includes(month)) {
                 kurmanaSelect.value = "Kurmaana 3ffaa";
-                fiscalYearNum = calYearNum + 1;
+                computedFiscalYear = calYear;
             } else {
                 kurmanaSelect.value = "Kurmaana 4ffaa";
-                fiscalYearNum = calYearNum + 1;
+                computedFiscalYear = calYear;
             }
 
-            fiscalYearInput.value = fiscalYearNum + " E.C";
+            fiscalInput.value = `${computedFiscalYear} E.C`;
         }
 
-        function loadStaffDropdown() {
-            const staffSelect = document.getElementById("saleStaffName");
-            staffSelect.innerHTML = '<option value="">-- Hojjetaa Filadhu --</option>';
-            staffDatabase.forEach(staff => {
+        function populateStaffDropdown() {
+            const select = document.getElementById("saleStaffSelect");
+            select.innerHTML = '<option value="">-- Maqaa Kee Filadhu --</option>';
+            staffDatabase.forEach(st => {
                 let opt = document.createElement("option");
-                opt.value = staff.name;
-                opt.textContent = `${staff.name} (${staff.year})`;
-                staffSelect.appendChild(opt);
+                opt.value = st.name;
+                opt.textContent = `${st.name} (${st.year})`;
+                select.appendChild(opt);
             });
         }
 
@@ -511,6 +588,10 @@
                 document.getElementById("mainDashboard").classList.remove("hidden");
                 document.getElementById("userInfo").innerHTML = `User: <b>${userIn}</b> (${roleIn.toUpperCase()})`;
 
+                populateStaffDropdown();
+                autoSelectKurmanaAndFiscalYear();
+                loadSubCategories();
+
                 if (roleIn === "admin") {
                     document.getElementById("btnAdminTab").style.display = "inline-block";
                     showTab('adminTab');
@@ -518,11 +599,10 @@
                     document.getElementById("btnAdminTab").style.display = "none";
                     showTab('staffTab');
                 }
-                autoSelectKurmanaAndYear();
-                loadSubCategories();
-                loadStaffDropdown();
+                
                 renderAdminTable();
                 renderSalesTable();
+                renderReports();
             } else {
                 alert("Username ykn Password sirrii miti!");
             }
@@ -533,7 +613,9 @@
         function showTab(tabId) {
             document.getElementById("adminTab").classList.add("hidden");
             document.getElementById("staffTab").classList.add("hidden");
+            document.getElementById("reportTab").classList.add("hidden");
             document.getElementById(tabId).classList.remove("hidden");
+            if(tabId === 'reportTab') renderReports();
         }
 
         function setStaffTarget() {
@@ -548,27 +630,32 @@
             
             document.getElementById("newStaffName").value = '';
             document.getElementById("newStaffTarget").value = '';
-            loadStaffDropdown();
+            populateStaffDropdown();
             renderAdminTable();
         }
 
         function registerSale() {
-            const staffName = document.getElementById("saleStaffName").value;
+            const staffName = document.getElementById("saleStaffSelect").value;
+            const clientName = document.getElementById("clientName").value.trim();
             const amount = parseFloat(document.getElementById("saleAmount").value);
-            const fiscalYear = document.getElementById("saleFiscalYear").value;
+            const calYear = document.getElementById("calYear").value;
             const month = document.getElementById("saleMonth").value;
+            const fiscalYear = document.getElementById("fiscalYear").value;
             const kurmana = document.getElementById("saleKurmana").value;
             const mainCat = document.getElementById("mainCat").value;
             const subCat = document.getElementById("subCat").value;
             const eventCat = mainCat === "KAN AYYAANOTAA" ? document.getElementById("eventCat").value : "";
 
-            if(!staffName) { alert("Maaloo maqaa hojjetaa filadhaa!"); return; }
+            if(!staffName) { alert("Maaloo Maqaa Hojjetaa filadhaa!"); return; }
+            if(!clientName) { alert("Maaloo Maqaa Dhaabbataa/Client galchaa!"); return; }
             if(!amount) { alert("Hamma galii maddisiistan galchaa!"); return; }
 
             salesDatabase.push({
                 id: Date.now(),
                 staffName: staffName,
-                year: fiscalYear,
+                clientName: clientName,
+                calYear: calYear,
+                fiscalYear: fiscalYear,
                 month: month,
                 kurmana: kurmana,
                 mainCat: mainCat,
@@ -579,10 +666,11 @@
 
             alert("Galiin Madde Milkaa'inaan Galmaa'era!");
             document.getElementById("saleAmount").value = '';
-            
-            // Immediate real-time sync with Admin performance and tables
+            document.getElementById("clientName").value = '';
+
             renderSalesTable();
             renderAdminTable();
+            renderReports();
         }
 
         function deleteSale(id) {
@@ -590,14 +678,16 @@
                 salesDatabase = salesDatabase.filter(item => item.id !== id);
                 renderSalesTable();
                 renderAdminTable();
+                renderReports();
             }
         }
 
         function deleteStaff(id) {
             if(confirm("Target hojjetaa kana haquu akka feetu mirkaneeffadhu?")) {
                 staffDatabase = staffDatabase.filter(item => item.id !== id);
-                loadStaffDropdown();
+                populateStaffDropdown();
                 renderAdminTable();
+                renderReports();
             }
         }
 
@@ -609,7 +699,7 @@
             tbody.innerHTML = "";
 
             let filtered = salesDatabase.filter(s => {
-                let matchYear = (filterYear === "ALL" || s.year === filterYear);
+                let matchYear = (filterYear === "ALL" || s.fiscalYear === filterYear);
                 let matchKurmana = (filterKurmana === "ALL" || s.kurmana === filterKurmana);
                 return matchYear && matchKurmana;
             });
@@ -618,17 +708,16 @@
                 const serviceDetail = sale.eventCat ? `${sale.subCat} (${sale.eventCat})` : sale.subCat;
                 const row = `<tr>
                     <td><b>${sale.staffName}</b></td>
-                    <td><b>${sale.year}</b> - ${sale.month}</td>
+                    <td>${sale.clientName}</td>
+                    <td><b>${sale.fiscalYear}</b> (${sale.month})</td>
                     <td>${sale.kurmana}</td>
                     <td>${sale.mainCat}</td>
                     <td>${serviceDetail}</td>
                     <td><b>${sale.amount.toLocaleString()} ETB</b></td>
-                    <td><button class="btn btn-danger" onclick="deleteSale(${sale.id})">Haqi</button></td>
+                    <td class="btn-col"><button class="btn btn-danger" onclick="deleteSale(${sale.id})">Haqi</button></td>
                 </tr>`;
                 tbody.innerHTML += row;
             });
-
-            renderSummaryCards(salesDatabase, "staffSummaryCards");
         }
 
         function renderAdminTable() {
@@ -636,88 +725,83 @@
             tbody.innerHTML = "";
 
             staffDatabase.forEach(staff => {
+                // Filter sales by staff name AND fiscal year
                 const totalRevenue = salesDatabase
-                    .filter(s => s.staffName === staff.name && s.year === staff.year)
+                    .filter(s => s.staffName === staff.name && s.fiscalYear === staff.year)
                     .reduce((sum, item) => sum + item.amount, 0);
 
-                const perf = ((totalRevenue / staff.target) * 100).toFixed(1);
+                const perf = staff.target > 0 ? ((totalRevenue / staff.target) * 100).toFixed(1) : 0;
                 const badgeClass = perf >= 100 ? 'badge-success' : 'badge-warning';
 
                 const row = `<tr>
                     <td><b>${staff.name}</b></td>
                     <td>${staff.year}</td>
                     <td>${staff.target.toLocaleString()} ETB</td>
-                    <td>${totalRevenue.toLocaleString()} ETB</td>
+                    <td><b>${totalRevenue.toLocaleString()} ETB</b></td>
                     <td><span class="badge ${badgeClass}">${perf}%</span></td>
-                    <td><button class="btn btn-danger" onclick="deleteStaff(${staff.id})">Haqi</button></td>
+                    <td class="btn-col"><button class="btn btn-danger" onclick="deleteStaff(${staff.id})">Haqi</button></td>
                 </tr>`;
                 tbody.innerHTML += row;
             });
-
-            renderSummaryCards(salesDatabase, "adminSummaryCards");
         }
 
-        function renderSummaryCards(dataList, containerId) {
-            const container = document.getElementById(containerId);
-            
-            // Total Regular Program
-            const totalRegular = dataList
-                .filter(s => s.mainCat === "KAN SAGANTAA IDILEE")
-                .reduce((sum, item) => sum + item.amount, 0);
+        function renderReports() {
+            // Totals
+            const totalRev = salesDatabase.reduce((sum, s) => sum + s.amount, 0);
+            const totalIdilee = salesDatabase.filter(s => s.mainCat === "KAN SAGANTAA IDILEE").reduce((sum, s) => sum + s.amount, 0);
+            const totalAyyaana = salesDatabase.filter(s => s.mainCat === "KAN AYYAANOTAA").reduce((sum, s) => sum + s.amount, 0);
 
-            // Services Breakdown (Stage Ayyaanaa, Dookimentarii, Ispoonsera)
-            const stageAyyaanaa = dataList.filter(s => s.subCat === "Stage Ayyaanaa").reduce((s, i) => s + i.amount, 0);
-            const dookimentarii = dataList.filter(s => s.subCat === "Dookimentarii Fiilmii").reduce((s, i) => s + i.amount, 0);
-            const ispoonseraAyyaanaa = dataList.filter(s => s.subCat === "Ispoonsera Ayyaanaa").reduce((s, i) => s + i.amount, 0);
+            document.getElementById("totalRevenueAll").innerText = totalRev.toLocaleString() + " ETB";
+            document.getElementById("totalIdilee").innerText = totalIdilee.toLocaleString() + " ETB";
+            document.getElementById("totalAyyaana").innerText = totalAyyaana.toLocaleString() + " ETB";
 
-            // Events Totals
-            let eventsSummaryHtml = "";
-            eventList.forEach(ev => {
-                const evTotal = dataList.filter(s => s.eventCat === ev).reduce((s, i) => s + i.amount, 0);
-                if(evTotal > 0) {
-                    eventsSummaryHtml += `<div class="summary-card" style="border-left-color: #0284C7;">
-                        <h4>Ayyaana: ${ev}</h4>
-                        <p>${evTotal.toLocaleString()} ETB</p>
-                    </div>`;
-                }
+            // Service Summary
+            const serviceTable = document.getElementById("serviceSummaryTable");
+            serviceTable.innerHTML = "";
+            const services = ["Stage Ayyaanaa", "Dookimentarii Fiilmii", "Ispoonsera Ayyaanaa", "Yeroo Qilleensaa(Raadiyoo fi TV)", "Ispoonsera Sagantaa( Raadiyoo fi TV)"];
+            services.forEach(srv => {
+                const tot = salesDatabase.filter(s => s.subCat === srv).reduce((sum, s) => sum + s.amount, 0);
+                serviceTable.innerHTML += `<tr><td>${srv}</td><td><b>${tot.toLocaleString()} ETB</b></td></tr>`;
             });
 
-            container.innerHTML = `
-                <div class="summary-card" style="border-left-color: #00853D;">
-                    <h4>Total Sagantaa Idilee</h4>
-                    <p>${totalRegular.toLocaleString()} ETB</p>
-                </div>
-                <div class="summary-card" style="border-left-color: #D97706;">
-                    <h4>Stage Ayyaanaa</h4>
-                    <p>${stageAyyaanaa.toLocaleString()} ETB</p>
-                </div>
-                <div class="summary-card" style="border-left-color: #D97706;">
-                    <h4>Dookimentarii Fiilmii</h4>
-                    <p>${dookimentarii.toLocaleString()} ETB</p>
-                </div>
-                <div class="summary-card" style="border-left-color: #D97706;">
-                    <h4>Ispoonsera Ayyaanaa</h4>
-                    <p>${ispoonseraAyyaanaa.toLocaleString()} ETB</p>
-                </div>
-                ${eventsSummaryHtml}
-            `;
+            // Event Summary
+            const eventTable = document.getElementById("eventSummaryTable");
+            eventTable.innerHTML = "";
+            eventList.forEach(ev => {
+                const tot = salesDatabase.filter(s => s.eventCat === ev).reduce((sum, s) => sum + s.amount, 0);
+                eventTable.innerHTML += `<tr><td>${ev}</td><td><b>${tot.toLocaleString()} ETB</b></td></tr>`;
+            });
+
+            // Client Summary
+            const clientTable = document.getElementById("clientSummaryTable");
+            clientTable.innerHTML = "";
+            const clientMap = {};
+            salesDatabase.forEach(s => {
+                clientMap[s.clientName] = (clientMap[s.clientName] || 0) + s.amount;
+            });
+            Object.keys(clientMap).forEach(client => {
+                clientTable.innerHTML += `<tr><td><b>${client}</b></td><td><b>${clientMap[client].toLocaleString()} ETB</b></td></tr>`;
+            });
         }
 
-        function exportToCSV(tableId, filename) {
+        function exportTableToCSV(tableID, filename) {
             let csv = [];
-            let rows = document.querySelectorAll("#" + tableId + " tr");
+            let rows = document.querySelectorAll("#" + tableID + " tr");
             
             for (let i = 0; i < rows.length; i++) {
                 let row = [], cols = rows[i].querySelectorAll("td, th");
-                for (let j = 0; j < cols.length - 1; j++) { // Exclude last Action column
-                    row.push('"' + cols[j].innerText.replace(/"/g, '""') + '"');
+                
+                for (let j = 0; j < cols.length; j++) {
+                    if(!cols[j].classList.contains("btn-col")) {
+                        row.push('"' + cols[j].innerText.replace(/"/g, '""') + '"');
+                    }
                 }
-                csv.push(row.join(","));
+                csv.push(row.join(","));        
             }
 
             let csvFile = new Blob([csv.join("\n")], {type: "text/csv"});
             let downloadLink = document.createElement("a");
-            downloadLink.download = filename + ".csv";
+            downloadLink.download = filename;
             downloadLink.href = window.URL.createObjectURL(csvFile);
             downloadLink.style.display = "none";
             document.body.appendChild(downloadLink);
