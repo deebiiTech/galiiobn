@@ -661,7 +661,7 @@
             const totalRev = mySales.reduce((sum, item) => sum + item.amount, 0);
             const perf = target > 0 ? ((totalRev / target) * 100).toFixed(1) : 0;
 
-            pBox.innerHTML = `Kabajamaa/oo <b>${currentUserData.name}</b>, kootaan siif kenname ETB <b>${target.toLocaleString()}</b> keessaa haga ammaatti ETB <b>${totalRev.toLocaleString()}</b> maddisiiftaniittu. Raawwiin keessan <b>% ${perf}</b> dha.`;
+            pBox.innerHTML = `Kabajamaa/tuu <b>${currentUserData.name}</b>, kootaa isiniif kenname ETB <b>${target.toLocaleString()}</b> keessaa haga ammaatti ETB <b>${totalRev.toLocaleString()}</b> maddisiiftaniittu. Raawwiin keessan <b>% ${perf}</b> dha.`;
         }
 
         function renderSalesTable() {
