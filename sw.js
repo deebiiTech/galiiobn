@@ -4,7 +4,7 @@ self.addEventListener('install', (e) => {
       './',
       './index.html',
       './manifest.json',
-      './obn-logo.png'
+      './obn-logo.JFIF'
     ])),
   );
 });
