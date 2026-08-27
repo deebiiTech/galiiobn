@@ -1,0 +1,21 @@
+{
+  "short_name": "OBN Galii",
+  "name": "OBN Revenue & Performance System",
+  "icons": [
+    {
+      "src": "obn-logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "obn-logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#FFFFFF",
+  "theme_color": "#E31B23",
+  "display": "standalone",
+  "orientation": "portrait"
+}
