@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYSTEMA GALII OBN - PRO EDITION</title>
+    <title>SYSTEMA GALII OBN - FIREBASE REALTIME</title>
     
     <!-- Firebase SDKs (Compat v9.22.1) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
@@ -23,28 +23,40 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif !important; }
-        body { background-color: var(--obn-gray); color: var(--obn-black); display: flex; flex-direction: column; min-height: 100vh; }
+        body { background-color: var(--obn-gray); color: var(--obn-black); display: flex; flex-direction: column; min-height: 100vh; font-size: 12pt; line-height: 1.4; }
 
+        /* HEADER STYLING */
         header {
             background: linear-gradient(135deg, var(--obn-white) 60%, var(--obn-red) 60%);
             border-bottom: 5px solid var(--obn-black);
-            padding: 12px 5%;
+            padding: 10px 5%;
             display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 1000;
         }
 
-        .brand-container { display: flex; align-items: center; gap: 15px; }
-        .brand-logo { height: 55px; width: auto; object-fit: contain; border-radius: 4px; }
-        .brand-text h1 { color: var(--obn-red); font-size: 20px; font-weight: 900; }
-        .brand-text p { font-size: 12px; font-weight: 700; color: var(--obn-black); }
+        .brand-container { display: flex; align-items: center; gap: 12px; }
+        .brand-logo { height: 55px; width: auto; object-fit: contain; }
+        .brand-text h1 { color: var(--obn-red); font-size: 13pt; font-weight: 900; line-height: 1.2; }
+        .brand-text p { font-size: 10pt; font-weight: 700; color: var(--obn-black); }
 
         .nav-right { display: flex; align-items: center; gap: 15px; }
-        .user-badge { color: var(--obn-white); font-weight: 600; font-size: 14px; text-align: right; }
+        .user-badge { color: var(--obn-white); font-weight: 600; font-size: 11pt; text-align: right; }
 
-        /* Hamburger Menu Mobile Toggle */
-        .hamburger { display: none; font-size: 24px; color: white; cursor: pointer; background: var(--obn-black); border: none; padding: 5px 12px; border-radius: 4px; }
+        /* HAMBURGER MENU */
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: transparent; border: none; padding: 5px; z-index: 1001; }
+        .hamburger div { width: 26px; height: 3px; background-color: var(--obn-black); border-radius: 2px; transition: all 0.3s ease; }
 
-        .container { max-width: 1300px; margin: 20px auto; padding: 0 15px; width: 100%; }
+        .mobile-nav {
+            position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+            background-color: var(--obn-black); opacity: 0.98; box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column; padding: 80px 20px 20px 20px; gap: 12px;
+            transition: right 0.4s ease-in-out; z-index: 999;
+        }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav .btn { width: 100%; text-align: left; padding: 12px; border-radius: 6px; font-size: 12pt; }
+
+        /* CONTAINER & CARDS */
+        .container { max-width: 1300px; margin: 25px auto; padding: 0 15px; width: 100%; }
         .hidden { display: none !important; }
 
         .card {
@@ -54,60 +66,70 @@
         .card-red { border-top: 6px solid var(--obn-red); }
         .card-green { border-top: 6px solid var(--obn-green); }
 
-        h2 { font-size: 19px; margin-bottom: 15px; color: var(--obn-black); border-bottom: 2px solid var(--obn-red); padding-bottom: 8px; }
-        h3 { font-size: 16px; margin-top: 20px; margin-bottom: 12px; border-bottom: 1px solid var(--obn-border); padding-bottom: 5px; }
+        h2 { font-size: 13pt; margin-bottom: 18px; color: var(--obn-black); border-bottom: 2px solid var(--obn-red); padding-bottom: 6px; font-weight: bold; }
+        h3 { font-size: 13pt; margin-top: 20px; margin-bottom: 12px; border-bottom: 1px solid var(--obn-border); padding-bottom: 4px; font-weight: bold; }
 
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-        .form-group { margin-bottom: 10px; }
-        label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-        input, select { width: 100%; padding: 9px; border: 1.5px solid var(--obn-border); border-radius: 6px; font-size: 13px; background: #FAFAFA; }
+        /* FORMS */
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; font-size: 12pt; font-weight: 700; margin-bottom: 5px; }
+        input, select { width: 100%; padding: 8px 10px; border: 1.5px solid var(--obn-border); border-radius: 6px; font-size: 12pt; background: #FAFAFA; }
 
-        .btn { background-color: var(--obn-red); color: white; padding: 9px 16px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px; }
+        /* BUTTONS */
+        .btn { background-color: var(--obn-red); color: white; padding: 10px 18px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 12pt; transition: background 0.2s; }
+        .btn:hover { opacity: 0.9; }
         .btn-green { background-color: var(--obn-green); }
         .btn-blue { background-color: #2563EB; }
+        .btn-print { background-color: #0F172A; }
 
-        .top-nav { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
-        .sum-card { background: #F1F5F9; border-left: 5px solid var(--obn-red); padding: 12px; border-radius: 6px; }
-        .sum-card-green { border-left-color: var(--obn-green); }
-        .sum-card h4 { font-size: 13px; color: #475569; }
-        .sum-card p { font-size: 17px; font-weight: bold; color: var(--obn-black); margin-top: 4px; }
+        .top-nav { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+        .summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .sum-card { background: #F8FAFC; border-left: 5px solid var(--obn-red); padding: 15px; border-radius: 6px; border: 1px solid var(--obn-border); }
+        .sum-card h4 { font-size: 12pt; font-weight: bold; margin-bottom: 5px; color: var(--obn-black); }
+        .sum-card p { font-size: 12pt; font-weight: bold; color: var(--obn-red); }
 
+        .personal-perf-box {
+            background: #EFF6FF; border: 1.5px solid #BFDBFE; border-radius: 8px; padding: 15px; margin-bottom: 20px;
+            font-size: 12pt; color: #1E3A8A;
+        }
+
+        /* TABLE & PRINT STYLES */
         .table-responsive { overflow-x: auto; margin-top: 15px; border-radius: 6px; border: 1px solid var(--obn-border); }
-        table { width: 100%; border-collapse: collapse; background: white; font-size: 13px; }
-        th, td { padding: 9px 10px; border-bottom: 1px solid var(--obn-border); text-align: left; }
-        th { background-color: var(--obn-black); color: white; }
-        tfoot tr td { background-color: #F8FAFC; font-weight: bold; font-size: 14px; border-top: 2px solid var(--obn-black); }
+        table { width: 100%; border-collapse: collapse; background: white; font-size: 12pt; }
+        th, td { padding: 8px 10px; border: 1px solid var(--obn-border); text-align: left; vertical-align: middle; }
+        th { background-color: var(--obn-black); color: white; font-size: 13pt; font-weight: bold; }
+        tfoot tr { background-color: #F1F5F9; font-weight: bold; }
 
+        /* FOOTER */
         footer { background-color: var(--obn-black); color: var(--obn-white); padding: 15px 5%; margin-top: auto; border-top: 4px solid var(--obn-red); }
-        .footer-content { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 13px; }
-        .footer-logo { height: 40px; }
+        .footer-content { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12pt; }
+        .footer-logo { height: 40px; width: auto; }
 
-        /* Performance Greeting Banner */
-        .perf-banner { background: linear-gradient(90deg, #1E293B, #0F172A); color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .perf-banner h3 { border: none; margin: 0; color: #38BDF8; font-size: 18px; }
-        .perf-banner p { margin-top: 5px; font-size: 14px; color: #E2E8F0; }
-
-        /* Responsive Mobile Layout */
+        /* RESPONSIVE MEDIA QUERIES */
         @media (max-width: 768px) {
-            header { flex-wrap: wrap; }
-            .hamburger { display: block; }
-            .top-nav { display: none; flex-direction: column; width: 100%; background: #fff; padding: 10px; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-            .top-nav.active { display: flex; }
-            .top-nav .btn { width: 100%; margin-left: 0 !important; }
-            .brand-text h1 { font-size: 16px; }
-            .brand-text p { font-size: 10px; }
+            .hamburger { display: flex; }
+            .desktop-nav { display: none; }
+            header { background: var(--obn-white); }
+            .brand-text h1 { font-size: 12pt; }
         }
 
-        /* Print Media Styles */
+        /* PRINT FORMATTING (A4 WRAPPER) */
         @media print {
-            header, footer, .top-nav, .btn, .form-grid, .hamburger { display: none !important; }
-            .card { border: none !important; box-shadow: none !important; padding: 0 !important; }
-            body { background: white !important; }
-            .table-responsive { overflow: visible !important; border: none !important; }
-            table { border: 1px solid #000 !important; width: 100% !important; }
-            th, td { border: 1px solid #000 !important; font-size: 11px !important; }
+            body { background: white; color: black; }
+            header, footer, .top-nav, .form-grid, .btn, .hamburger, .mobile-nav, #loginView { display: none !important; }
+            .container { max-width: 100%; margin: 0; padding: 0; }
+            .card { border: none; box-shadow: none; padding: 0; margin: 0; }
+            .print-header { display: flex !important; justify-content: space-between; align-items: center; border-bottom: 2px solid black; padding-bottom: 10px; margin-bottom: 15px; }
+            .print-header img { height: 60px; }
+            .print-header-text { text-align: center; }
+            .print-header-text h2 { border: none; margin: 0; padding: 0; font-size: 13pt; }
+            table { width: 100%; border-collapse: collapse; font-size: 12pt !important; }
+            th, td { border: 1px solid black !important; padding: 5px 6px !important; }
+            th { background-color: #E2E8F0 !important; color: black !important; font-size: 12pt !important; }
+            .hidden-print { display: none !important; }
         }
+
+        .print-header { display: none; }
     </style>
 </head>
 <body>
@@ -122,14 +144,34 @@
         </div>
         <div class="nav-right">
             <div class="user-badge" id="userInfo">Seensa Systemaa</div>
-            <button class="hamburger hidden" id="hamburgerBtn" onclick="toggleMenu()">☰</button>
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()">
+                <div></div><div></div><div></div>
+            </button>
         </div>
     </header>
 
+    <!-- MOBILE NAVIGATION MENU -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="btn" id="mBtnAdmin" onclick="showTab('adminTab'); toggleMobileNav();">Admin Panel</button>
+        <button class="btn btn-green" id="mBtnStaff" onclick="showTab('staffTab'); toggleMobileNav();">Galmee Galii (Sales)</button>
+        <button class="btn btn-blue" onclick="showTab('reportTab'); toggleMobileNav();">Gabaasa & Summary</button>
+        <button class="btn" style="background:#475569;" onclick="logoutUser()">Bahi (Logout)</button>
+    </div>
+
     <div class="container">
 
+        <!-- HEADER FOR PRINTING -->
+        <div class="print-header">
+            <img src="obn-logo.JFIF" alt="OBN Logo" onerror="this.src='https://via.placeholder.com/60?text=OBN'">
+            <div class="print-header-text">
+                <h2>OROMIA BROADCASTING NETWORK (OBN)</h2>
+                <p>Gabaasa Galii fi Spoonsorshiipii Idilee/Ayyaanaa</p>
+            </div>
+            <img src="obn-logo.JFIF" alt="OBN Logo" onerror="this.src='https://via.placeholder.com/60?text=OBN'">
+        </div>
+
         <!-- LOGIN PANEL -->
-        <div id="loginView" class="card card-red" style="max-width: 400px; margin: 50px auto;">
+        <div id="loginView" class="card card-red" style="max-width: 400px; margin: 40px auto;">
             <h2>Seensa Systema Galii OBN</h2>
             <div class="form-group">
                 <label>Email Hojjetaa</label>
@@ -144,23 +186,18 @@
 
         <!-- MAIN DASHBOARD -->
         <div id="mainDashboard" class="hidden">
-            <div class="top-nav" id="topNav">
+            <div class="top-nav desktop-nav">
                 <button class="btn" id="btnAdminTab" onclick="showTab('adminTab')">Admin Panel</button>
                 <button class="btn btn-green" id="btnStaffTab" onclick="showTab('staffTab')">Galmee Galii (Sales)</button>
                 <button class="btn btn-blue" onclick="showTab('reportTab')">Gabaasa & Summary</button>
+                <button class="btn btn-print" onclick="window.print()">🖨️ Print Gabaasa</button>
                 <button class="btn" style="background:#475569; margin-left:auto;" onclick="logoutUser()">Bahi (Logout)</button>
-            </div>
-
-            <!-- PERSONAL PERFORMANCE GREETING (Staff view) -->
-            <div id="staffPerfBanner" class="perf-banner hidden">
-                <h3 id="welcomeMsg">Kabajamaa/tii, ...</h3>
-                <p id="perfMsg">Kootaan siif kenname hangana keessaa hangana maddisiifteetta...</p>
             </div>
 
             <!-- ADMIN TAB -->
             <div id="adminTab" class="card card-red hidden">
                 <h2>Admin: User Uumuu & Target Qabsiisuu</h2>
-                <div class="form-grid">
+                <div class="form-grid hidden-print">
                     <div class="form-group">
                         <label>Maqaa Guutuu Hojjetaa</label>
                         <input type="text" id="newStaffName" placeholder="Maqaa Guutuu">
@@ -192,13 +229,14 @@
                         <input type="number" id="newStaffTarget" placeholder="Target">
                     </div>
                 </div>
-                <button class="btn" onclick="registerUserByAdmin()">Hojjetaa Register Gochi</button>
+                <button class="btn hidden-print" onclick="registerUserByAdmin()">Hojjetaa Register Gochi</button>
 
                 <h3>Tarree Hojjettootaa & Target Performance</h3>
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Maqaa Hojjetaa</th>
                                 <th>Email</th>
                                 <th>Bara Hojii</th>
@@ -214,15 +252,18 @@
 
             <!-- SALES TAB -->
             <div id="staffTab" class="card card-green hidden">
+                <!-- PERSONAL PERFORMANCE SUMMARY BOX -->
+                <div class="personal-perf-box" id="personalPerfBox"></div>
+
                 <h2>Galmee Galii Madde (Sales Register)</h2>
-                <div class="form-grid">
+                <div class="form-grid hidden-print">
                     <div class="form-group">
                         <label>Maqaa Dhaabbata/Client</label>
                         <input type="text" id="clientName" placeholder="Dhaabbata Galii Kaffale">
                     </div>
                     <div class="form-group">
-                        <label>Gosa Media (OBN Platform)</label>
-                        <select id="mediaPlatform">
+                        <label>Gosa Media OBN</label>
+                        <select id="mediaCategory">
                             <option value="OBN TV">OBN TV</option>
                             <option value="OBN Radio">OBN Radio</option>
                             <option value="OBN FM">OBN FM</option>
@@ -231,7 +272,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Ji'a Galmee</label>
+                        <label>Ji'a & Bara Galmee</label>
                         <select id="saleMonth" onchange="autoSelectFiscal()">
                             <option value="Adoolessa">Adoolessa</option>
                             <option value="Hagayya">Hagayya</option>
@@ -282,47 +323,25 @@
                         <input type="number" id="saleAmount" placeholder="0.00">
                     </div>
                 </div>
-                <button class="btn btn-green" onclick="saveSalesData()">Galii Galmeessi</button>
-
-                <!-- PERSONAL SUMMARY CARDS FOR LOGGED IN STAFF -->
-                <h3>Summary Performance Dhuunfaa</h3>
-                <div class="summary-cards">
-                    <div class="sum-card sum-card-green">
-                        <h4>Galii Sagantaa Idilee</h4>
-                        <p id="staffIdileeRev">0 ETB</p>
-                    </div>
-                    <div class="sum-card sum-card-green">
-                        <h4>Galii Ayyaanotaa</h4>
-                        <p id="staffAyyaanaRev">0 ETB</p>
-                    </div>
-                </div>
+                <button class="btn btn-green hidden-print" onclick="saveSalesData()">Galii Galmeessi</button>
 
                 <h3>Tarree Galii Kuufame (Live Data)</h3>
                 <div class="table-responsive">
                     <table>
                         <thead>
-                            <tr>
-                                <th>Hojjetaa</th>
-                                <th>Client</th>
-                                <th>Media</th>
-                                <th>Bara / Ji'a</th>
-                                <th>Kurmaana</th>
-                                <th>Tajaajila / Ayyaana</th>
-                                <th>Galii (ETB)</th>
-                            </tr>
+                            <tr id="salesTableHeader"></tr>
                         </thead>
                         <tbody id="staffSalesTable"></tbody>
+                        <tfoot id="salesTableFooter"></tfoot>
                     </table>
                 </div>
+
+                <div id="staffPersonalCategorizedSummary"></div>
             </div>
 
             <!-- REPORT TAB -->
             <div id="reportTab" class="card card-red hidden">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h2>Gabaasa Guutuu & Summary Galii OBN</h2>
-                    <button class="btn btn-blue" onclick="window.print()">Print / Download PDF</button>
-                </div>
-
+                <h2>Gabaasa Guutuu & Summary Galii OBN</h2>
                 <div class="summary-cards">
                     <div class="sum-card">
                         <h4>Ida'ama Galii Guutuu</h4>
@@ -338,27 +357,14 @@
                     </div>
                 </div>
 
-                <h3>Summary Galii Guutuu (Detailed Report Table)</h3>
+                <h3>Summary Dhaabbilee (Clients) & Media Waliin</h3>
                 <div class="table-responsive">
-                    <table id="fullPrintTable">
+                    <table>
                         <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Maqaa Dhaabbilee</th>
-                                <th>Gosa Media</th>
-                                <th>Gosa Tajaajilaa</th>
-                                <th>Gosa Ayyaanaa</th>
-                                <th>Hojjetaa Maddisiise</th>
-                                <th>Hanga Maallaqaa (ETB)</th>
-                            </tr>
+                            <tr id="reportTableHeader"></tr>
                         </thead>
-                        <tbody id="detailedReportTable"></tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="6" style="text-align: right;">Ida'ama Guutuu (Total Revenue):</td>
-                                <td id="tableTotalSum">0 ETB</td>
-                            </tr>
-                        </tfoot>
+                        <tbody id="summaryReportTable"></tbody>
+                        <tfoot id="summaryReportFooter"></tfoot>
                     </table>
                 </div>
             </div>
@@ -368,16 +374,16 @@
 
     <footer>
         <div class="footer-content">
-            <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="display:flex; align-items:center; gap:10px;">
                 <img src="obn-logo.JFIF" alt="OBN Logo" class="footer-logo" onerror="this.src='https://via.placeholder.com/40?text=OBN'">
-                <span><strong>Oromia Broadcasting Network</strong> - Systema Galii</span>
+                <div><strong>Oromia Broadcasting Network</strong> - Systema Galii</div>
             </div>
             <div>OBN - Sales & Sponsorship Department</div>
         </div>
     </footer>
 
     <script>
-        // CONFIGURATION FIREBASE
+        // CONFIGURATION FIREBASE KEE
         const firebaseConfig = {
             apiKey: "AIzaSyCa8D6KY4vdTg0cGp0MyDzbdiQpw4xu4DY",
             authDomain: "obn-galii-system.firebaseapp.com",
@@ -401,11 +407,11 @@
             "KAN AYYAANOTAA": ["Stage Ayyaanaa", "Dookimentarii Fiilmii", "Ispoonsera Ayyaanaa"],
             "KAN SAGANTAA IDILEE": ["Yeroo Qilleensaa(Raadiyoo fi TV)", "Ispoonsera Sagantaa( Raadiyoo fi TV)"]
         };
-        const eventList = ["Bara Haaraa", "Masqala", "Irreecha", "Qillee", "Faasikaa", "Cuuphaa", "Raamadaana", "Arafaa", "N/A"];
+        const eventList = ["Bara Haaraa", "Masqala", "Irreecha", "Qillee", "Faasikaa", "Cuuphaa", "Raamadaana", "Arafaa"];
 
-        function toggleMenu() {
-            const nav = document.getElementById("topNav");
-            nav.classList.toggle("active");
+        // TOGGLE HAMBURGER MENU
+        function toggleMobileNav() {
+            document.getElementById("mobileNav").classList.toggle("active");
         }
 
         // Auth Observer
@@ -422,16 +428,15 @@
 
                     document.getElementById("loginView").classList.add("hidden");
                     document.getElementById("mainDashboard").classList.remove("hidden");
-                    document.getElementById("hamburgerBtn").classList.remove("hidden");
                     document.getElementById("userInfo").innerHTML = `<b>${currentUserData.name}</b> (${currentUserData.role.toUpperCase()})`;
 
                     if (currentUserData.role === "admin") {
                         document.getElementById("btnAdminTab").style.display = "inline-block";
-                        document.getElementById("staffPerfBanner").classList.add("hidden");
+                        document.getElementById("mBtnAdmin").style.display = "block";
                         showTab("adminTab");
                     } else {
                         document.getElementById("btnAdminTab").style.display = "none";
-                        document.getElementById("staffPerfBanner").classList.remove("hidden");
+                        document.getElementById("mBtnAdmin").style.display = "none";
                         showTab("staffTab");
                     }
 
@@ -442,7 +447,6 @@
             } else {
                 document.getElementById("loginView").classList.remove("hidden");
                 document.getElementById("mainDashboard").classList.add("hidden");
-                document.getElementById("hamburgerBtn").classList.add("hidden");
             }
         });
 
@@ -459,7 +463,6 @@
             document.getElementById("staffTab").classList.add("hidden");
             document.getElementById("reportTab").classList.add("hidden");
             document.getElementById(tabId).classList.remove("hidden");
-            document.getElementById("topNav").classList.remove("active");
         }
 
         function registerUserByAdmin() {
@@ -531,7 +534,7 @@
             if (mainCat === "KAN AYYAANOTAA") {
                 evGrp.style.display = "block";
                 evSel.innerHTML = "";
-                eventList.filter(e => e !== "N/A").forEach(e => { evSel.innerHTML += `<option value="${e}">${e}</option>`; });
+                eventList.forEach(e => { evSel.innerHTML += `<option value="${e}">${e}</option>`; });
             } else {
                 evGrp.style.display = "none";
             }
@@ -539,6 +542,7 @@
 
         function saveSalesData() {
             const client = document.getElementById("clientName").value.trim();
+            const media = document.getElementById("mediaCategory").value;
             const amount = parseFloat(document.getElementById("saleAmount").value);
             if(!client || !amount) { alert("Maaloo Client fi Amount galchaa!"); return; }
 
@@ -546,14 +550,14 @@
                 uid: currentUserData.uid,
                 staffName: currentUserData.name,
                 clientName: client,
-                mediaPlatform: document.getElementById("mediaPlatform").value,
+                mediaCategory: media,
                 month: document.getElementById("saleMonth").value,
                 calYear: document.getElementById("calYear").value,
                 fiscalYear: document.getElementById("fiscalYear").value,
                 kurmana: document.getElementById("saleKurmana").value,
                 mainCat: document.getElementById("mainCat").value,
                 subCat: document.getElementById("subCat").value,
-                eventCat: document.getElementById("mainCat").value === "KAN AYYAANOTAA" ? document.getElementById("eventCat").value : "N/A",
+                eventCat: document.getElementById("mainCat").value === "KAN AYYAANOTAA" ? document.getElementById("eventCat").value : "-",
                 amount: amount,
                 timestamp: Date.now()
             };
@@ -573,7 +577,7 @@
                     globalUsers.push({ uid: child.key, ...child.val() });
                 });
                 renderAdminTable();
-                updatePersonalBanner();
+                renderPersonalPerformance();
             });
 
             db.ref("sales").on("value", snapshot => {
@@ -584,62 +588,141 @@
                 renderSalesTable();
                 renderReports();
                 renderAdminTable();
-                updatePersonalBanner();
+                renderPersonalPerformance();
+                renderStaffCategorizedSummary();
             });
         }
 
-        function updatePersonalBanner() {
-            if (!currentUserData || currentUserData.role === "admin") return;
-
-            const mySales = globalSales.filter(s => s.uid === currentUserData.uid && s.fiscalYear === currentUserData.year);
-            const myTotal = mySales.reduce((sum, s) => sum + s.amount, 0);
+        function renderPersonalPerformance() {
+            if (!currentUserData) return;
+            const pBox = document.getElementById("personalPerfBox");
             const target = currentUserData.target || 0;
-            const perf = target > 0 ? ((myTotal / target) * 100).toFixed(1) : 0;
+            const mySales = globalSales.filter(s => s.uid === currentUserData.uid);
+            const totalRev = mySales.reduce((sum, item) => sum + item.amount, 0);
+            const perf = target > 0 ? ((totalRev / target) * 100).toFixed(1) : 0;
 
-            document.getElementById("welcomeMsg").innerText = `Kabajamaa/tii ${currentUserData.name}`;
-            document.getElementById("perfMsg").innerText = `Target bara ${currentUserData.year || '2018 E.C'} kee ${target.toLocaleString()} ETB keessaa hanga ammaatti ${myTotal.toLocaleString()} ETB maddisiifteetta. Raawwii kee: ${perf}%`;
-
-            const myIdilee = mySales.filter(s => s.mainCat === "KAN SAGANTAA IDILEE").reduce((sum, s) => sum + s.amount, 0);
-            const myAyyaana = mySales.filter(s => s.mainCat === "KAN AYYAANOTAA").reduce((sum, s) => sum + s.amount, 0);
-            document.getElementById("staffIdileeRev").innerText = myIdilee.toLocaleString() + " ETB";
-            document.getElementById("staffAyyaanaRev").innerText = myAyyaana.toLocaleString() + " ETB";
+            pBox.innerHTML = `Kabajamaa/oo <b>${currentUserData.name}</b>, kootaan siif kenname ETB <b>${target.toLocaleString()}</b> keessaa haga ammaatti ETB <b>${totalRev.toLocaleString()}</b> maddisiifteetta. Raawwiin kee <b>% ${perf}</b> dha.`;
         }
 
         function renderSalesTable() {
+            const headerTr = document.getElementById("salesTableHeader");
             const tbody = document.getElementById("staffSalesTable");
+            const tfoot = document.getElementById("salesTableFooter");
             tbody.innerHTML = "";
 
-            let filtered = (currentUserData.role === "admin") ? globalSales : globalSales.filter(s => s.uid === currentUserData.uid);
+            const isAdmin = (currentUserData.role === "admin");
 
-            filtered.forEach(s => {
-                const sDetail = s.eventCat && s.eventCat !== "N/A" ? `${s.subCat} (${s.eventCat})` : s.subCat;
-                tbody.innerHTML += `<tr>
-                    <td><b>${s.staffName}</b></td>
-                    <td>${s.clientName}</td>
-                    <td><span style="background:#E0F2FE; color:#0369A1; padding:3px 6px; border-radius:4px; font-weight:bold;">${s.mediaPlatform || 'OBN TV'}</span></td>
-                    <td><b>${s.fiscalYear}</b> (${s.month})</td>
-                    <td>${s.kurmana}</td>
-                    <td>${s.mainCat} - ${sDetail}</td>
-                    <td><b>${s.amount.toLocaleString()} ETB</b></td>
-                </tr>`;
+            // Header dynamic construction based on requirements
+            if (isAdmin) {
+                headerTr.innerHTML = `
+                    <th>#</th>
+                    <th>Maqaa Dhaabbilee</th>
+                    <th>Gosa Media</th>
+                    <th>Gosa Tajaajilaa</th>
+                    <th>Gosa Ayyaanaa</th>
+                    <th>Hojjetaa Maddisiise</th>
+                    <th>Hanga Maallaqaa (ETB)</th>
+                `;
+            } else {
+                headerTr.innerHTML = `
+                    <th>#</th>
+                    <th>Maqaa Dhaabbilee</th>
+                    <th>Gosa Media</th>
+                    <th>Gosa Tajaajilaa</th>
+                    <th>Gosa Ayyaanaa</th>
+                    <th>Hanga Maallaqaa (ETB)</th>
+                `;
+            }
+
+            let filtered = isAdmin ? globalSales : globalSales.filter(s => s.uid === currentUserData.uid);
+            let totalAmount = 0;
+
+            filtered.forEach((s, idx) => {
+                totalAmount += s.amount;
+                if (isAdmin) {
+                    tbody.innerHTML += `<tr>
+                        <td>${idx + 1}</td>
+                        <td><b>${s.clientName}</b></td>
+                        <td>${s.mediaCategory || 'OBN TV'}</td>
+                        <td>${s.subCat}</td>
+                        <td>${s.eventCat || '-'}</td>
+                        <td><b>${s.staffName}</b></td>
+                        <td><b>${s.amount.toLocaleString()} ETB</b></td>
+                    </tr>`;
+                } else {
+                    tbody.innerHTML += `<tr>
+                        <td>${idx + 1}</td>
+                        <td><b>${s.clientName}</b></td>
+                        <td>${s.mediaCategory || 'OBN TV'}</td>
+                        <td>${s.subCat}</td>
+                        <td>${s.eventCat || '-'}</td>
+                        <td><b>${s.amount.toLocaleString()} ETB</b></td>
+                    </tr>`;
+                }
             });
+
+            // Running total footer
+            const colSpanVal = isAdmin ? 6 : 5;
+            tfoot.innerHTML = `<tr>
+                <td colspan="${colSpanVal}" style="text-align:right;"><b>IDA'AMA GUUTUU:</b></td>
+                <td><b>${totalAmount.toLocaleString()} ETB</b></td>
+            </tr>`;
+        }
+
+        function renderStaffCategorizedSummary() {
+            if (!currentUserData) return;
+            const container = document.getElementById("staffPersonalCategorizedSummary");
+            const mySales = globalSales.filter(s => s.uid === currentUserData.uid);
+
+            let eventMap = {}, serviceMap = {}, mediaMap = {};
+            let idileeTotal = 0;
+
+            mySales.forEach(s => {
+                if (s.mainCat === "KAN AYYAANOTAA" && s.eventCat && s.eventCat !== "-") {
+                    eventMap[s.eventCat] = (eventMap[s.eventCat] || 0) + s.amount;
+                }
+                if (s.mainCat === "KAN SAGANTAA IDILEE") {
+                    idileeTotal += s.amount;
+                }
+                serviceMap[s.subCat] = (serviceMap[s.subCat] || 0) + s.amount;
+                const mName = s.mediaCategory || 'OBN TV';
+                mediaMap[mName] = (mediaMap[mName] || 0) + s.amount;
+            });
+
+            let html = `<h3 style="margin-top:30px;">Summary Galii Dhuunfaa (Gosa Tajaajilaa, Ayyaana & Media)</h3><div class="summary-cards">`;
+            
+            html += `<div class="sum-card"><h4>Sagantaa Idilee</h4><p>${idileeTotal.toLocaleString()} ETB</p></div>`;
+            
+            Object.keys(eventMap).forEach(e => {
+                html += `<div class="sum-card"><h4>Ayyaana: ${e}</h4><p>${eventMap[e].toLocaleString()} ETB</p></div>`;
+            });
+            Object.keys(serviceMap).forEach(serv => {
+                html += `<div class="sum-card"><h4>Tajaajila: ${serv}</h4><p>${serviceMap[serv].toLocaleString()} ETB</p></div>`;
+            });
+            Object.keys(mediaMap).forEach(m => {
+                html += `<div class="sum-card"><h4>Media: ${m}</h4><p>${mediaMap[m].toLocaleString()} ETB</p></div>`;
+            });
+
+            html += `</div>`;
+            container.innerHTML = html;
         }
 
         function renderAdminTable() {
             const tbody = document.getElementById("adminStaffTable");
             tbody.innerHTML = "";
 
-            globalUsers.forEach(u => {
+            globalUsers.forEach((u, idx) => {
                 const totalRev = globalSales.filter(s => s.uid === u.uid && s.fiscalYear === u.year).reduce((sum, item) => sum + item.amount, 0);
                 const perf = u.target > 0 ? ((totalRev / u.target) * 100).toFixed(1) : 0;
 
                 tbody.innerHTML += `<tr>
+                    <td>${idx + 1}</td>
                     <td><b>${u.name}</b></td>
                     <td>${u.email}</td>
                     <td>${u.year || '-'}</td>
                     <td>${(u.target || 0).toLocaleString()} ETB</td>
                     <td><b>${totalRev.toLocaleString()} ETB</b></td>
-                    <td><b>${perf}%</b></td>
+                    <td><b>% ${perf}</b></td>
                 </tr>`;
             });
         }
@@ -653,24 +736,66 @@
             document.getElementById("totalIdilee").innerText = idilee.toLocaleString() + " ETB";
             document.getElementById("totalAyyaana").innerText = ayyaana.toLocaleString() + " ETB";
 
-            // Detailed Report Table for Print
-            const dTable = document.getElementById("detailedReportTable");
-            dTable.innerHTML = "";
-            let count = 1;
+            const headerTr = document.getElementById("reportTableHeader");
+            const cTable = document.getElementById("summaryReportTable");
+            const cFoot = document.getElementById("summaryReportFooter");
+            cTable.innerHTML = "";
 
-            globalSales.forEach(s => {
-                dTable.innerHTML += `<tr>
-                    <td>${count++}</td>
-                    <td><b>${s.clientName}</b></td>
-                    <td>${s.mediaPlatform || 'OBN TV'}</td>
-                    <td>${s.subCat}</td>
-                    <td>${s.eventCat || 'N/A'}</td>
-                    <td>${s.staffName}</td>
-                    <td><b>${s.amount.toLocaleString()} ETB</b></td>
-                </tr>`;
+            const isAdmin = (currentUserData.role === "admin");
+
+            if (isAdmin) {
+                headerTr.innerHTML = `
+                    <th>#</th>
+                    <th>Maqaa Dhaabbilee</th>
+                    <th>Gosa Media</th>
+                    <th>Gosa Tajaajilaa</th>
+                    <th>Gosa Ayyaanaa</th>
+                    <th>Hojjetaa Maddisiise</th>
+                    <th>Hanga Maallaqaa (ETB)</th>
+                `;
+            } else {
+                headerTr.innerHTML = `
+                    <th>#</th>
+                    <th>Maqaa Dhaabbilee</th>
+                    <th>Gosa Media</th>
+                    <th>Gosa Tajaajilaa</th>
+                    <th>Gosa Ayyaanaa</th>
+                    <th>Hanga Maallaqaa (ETB)</th>
+                `;
+            }
+
+            let grandTotal = 0;
+            let displaySales = isAdmin ? globalSales : globalSales.filter(s => s.uid === currentUserData.uid);
+
+            displaySales.forEach((s, idx) => {
+                grandTotal += s.amount;
+                if (isAdmin) {
+                    cTable.innerHTML += `<tr>
+                        <td>${idx + 1}</td>
+                        <td><b>${s.clientName}</b></td>
+                        <td>${s.mediaCategory || 'OBN TV'}</td>
+                        <td>${s.subCat}</td>
+                        <td>${s.eventCat || '-'}</td>
+                        <td><b>${s.staffName}</b></td>
+                        <td><b>${s.amount.toLocaleString()} ETB</b></td>
+                    </tr>`;
+                } else {
+                    cTable.innerHTML += `<tr>
+                        <td>${idx + 1}</td>
+                        <td><b>${s.clientName}</b></td>
+                        <td>${s.mediaCategory || 'OBN TV'}</td>
+                        <td>${s.subCat}</td>
+                        <td>${s.eventCat || '-'}</td>
+                        <td><b>${s.amount.toLocaleString()} ETB</b></td>
+                    </tr>`;
+                }
             });
 
-            document.getElementById("tableTotalSum").innerText = total.toLocaleString() + " ETB";
+            const colSpanVal = isAdmin ? 6 : 5;
+            cFoot.innerHTML = `<tr>
+                <td colspan="${colSpanVal}" style="text-align:right;"><b>IDA'AMA GUUTUU GALII:</b></td>
+                <td><b>${grandTotal.toLocaleString()} ETB</b></td>
+            </tr>`;
         }
     </script>
 </body>
