@@ -3,13 +3,13 @@
   "name": "OBN Revenue & Performance System",
   "icons": [
     {
-      "src": "obn-logo.png",
-      "type": "image/png",
+      "src": "obn-logo.JFIF",
+      "type": "image/jpeg",
       "sizes": "192x192"
     },
     {
-      "src": "obn-logo.png",
-      "type": "image/png",
+      "src": "obn-logo.JFIF",
+      "type": "image/jpeg",
       "sizes": "512x512"
     }
   ],
